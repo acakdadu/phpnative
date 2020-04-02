@@ -3,9 +3,9 @@
 	require_once('config/connection.php');
   require_once('config/helper.php');
   
-  // Check if the user is already logged in, if yes then redirect him to welcome page
+  // Check if the user is already logged in for button signout
   $isLoggedin = false;
-  if ((isset($_SESSION['loggedin'])) && $_SESSION['loggedin'] == TRUE) {
+  if(isset($_SESSION["loggedin"])){
     $isLoggedin = true;
   }
 ?>

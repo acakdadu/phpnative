@@ -13,7 +13,7 @@
 	// Create a connection
 	$link = mysqli_connect($host,$user,$pass, $db);
 
-	// Checking for connection function
-	if (!$link) {
-		echo "<b>Connection failed!</b>";
+	// Check connection
+	if($link === false){
+	    die("ERROR: Could not connect. " . mysqli_connect_error());
 	}

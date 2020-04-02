@@ -19,15 +19,17 @@
 				- signout.php
 				- signup.php
 
-		- Connection.php (session_start() here..)
+		- connection.php (session_start() here..)
 
-		- Helper.php (Functions) :
+		- helper.php (Functions) :
 			> Set default time
 			> Get automatically url path on server (BASE_URL)
 			> Config apps from db data
 			> Get Random Name and Email (ID)
 			> Detail array (pre->print = parr())
 			> Date format Indonesia (Full, Day and Month)
+
+	 - index.php (Hide structure of configuration)
 
 
 [#] Libraries
@@ -48,3 +50,4 @@
 - phpnative.sql
 	> config (name_apps, owner, maintenance, updated_at)
 	> users (id, username, email, password, active)
+	> persons (id, first_name, last_name, email, active)

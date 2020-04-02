@@ -4,7 +4,7 @@
 	require_once '../helper.php';
 
 	// Check if the user is already logged in, if yes then redirect him to welcome page
-	if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true){
+  if(isset($_SESSION["loggedin"])){
 		header("Location: ".BASE_URL);
 		exit;
 	}
@@ -14,7 +14,7 @@
 	$username_err = $password_err = "";
 
 	// Processing form data when form is submitted
-	if($_SERVER["REQUEST_METHOD"] == "POST"){
+	if($_SERVER["REQUEST_METHOD"] == "POST" && count($_POST) > 0){
 	 
 	    // Check if username is empty
 	    if(empty(trim($_POST["username"]))){
@@ -90,4 +90,7 @@
 	    
 	    // Close connection
 	    mysqli_close($link);
-	}
+	} else {
+      header("Location: ".BASE_URL, true, 400); // Bad Request
+      exit;
+  }
