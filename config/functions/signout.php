@@ -14,4 +14,7 @@
 		header("Location: ".BASE_URL);
 		exit;
 
+	} else {
+		header("Location: ".BASE_URL, true, 400); // Bad Request
+		exit;
 	}

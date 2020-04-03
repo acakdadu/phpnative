@@ -23,6 +23,9 @@
     <!-- Font awesome 4 -->
     <link rel="stylesheet" href="<?= BASE_URL.'libraries/font-awesome-4/css/font-awesome.min.css'; ?>">
 
+    <!-- dataTables -->
+    <!-- <link rel="stylesheet" href="<?= BASE_URL.'libraries/dataTables/DataTables-1.10.20/css/dataTables.bootstrap.css'; ?>"> -->
+
 		<!-- MyStyle CSS -->
     <link rel="stylesheet" href="<?= BASE_URL.'assets/css/mystyle.css'; ?>">
 
@@ -33,45 +36,87 @@
   </head>
   <body>
     
-    <center class='mt-3'>
     <?php  
     if ($isLoggedin) {
     ?>
-    
-    <a href="<?= BASE_URL.'config/functions/signout.php'; ?>" class="btn btn-sm btn-danger">Sign Out</a>
-    
+      
+      <center class='mt-3'>
+        <a href="<?= BASE_URL.'config/functions/signout.php'; ?>" class="btn btn-sm btn-danger">Sign Out</a>
+      </center>
+
+      <div class="row no-gutters" style="margin-top: 130px;">
+        <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 no-gutters">
+          <ul class="nav nav-tabs mb-3">
+            <li class="nav-item">
+              <a class="nav-link" href="" page="create">Create</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="" page="read">Read</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="" page="update">Update</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="" page="delete">Delete</a>
+            </li>
+          </ul>
+          <div id="content">
+            <h1 class="text-center display-3 mb-4 mt-5">Hello, I am CRUD</h1>
+            <blockquote class="blockquote text-justify mt-3">
+              <p class="mb-0">Anda bisa mempelajari crud pada menu diatas semua fungsi bisa digunaan, jika sudah selesai sebaiknya hapus folder <code>crud</code>. Seluruh halaman crud ada pada folder tersebut, jika memiliki kendala baca selengkapnya di dokumentasi <a href="#">disini</a></p>
+            </blockquote>
+          </div>
+        </div>
+      </div>
+
     <?php
     } else {
     ?>
 
-    <a href="<?= BASE_URL.'signin'; ?>" class="btn btn-sm btn-light">Sign In</a>
-
-    <?php
-    }
-    ?>
-
-    <div class="row no-gutters" style="margin-top: 130px;">
-      <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 no-gutters text-center">
-      <h1 class="text-center display-2 mb-0"><kbd>phpnative.</kbd></h1>
-      <hr>
-      <blockquote class="blockquote text-justify mt-3">
-        <p class="mb-0"><span class="font-weight-bold">PHP native</span> merupakan pemrograman web perpaduan bahasa pemrograman yang didasari dengan bahasa pemrograman PHP yang mana bisa disisipi oleh text Javascript, css, bootstrap dan lain-lain. Native sendiri artinya asli, yakni pemrograman php yang murni disusun dan di coding/dibangun oleh para programmer sendiri tanpa ada istilah tambahan buat settingan/ konfigurasi lainnya. Manfaat dari PHP Native sederhana kalau kita sudah menguasai maka akan lebih mudah menggunakan PHP Framework.</p>
-      </blockquote>
+    <center class='mt-3'>
+      <a href="<?= BASE_URL.'signin'; ?>" class="btn btn-sm btn-light">Sign In</a>
+      <div class="row no-gutters" style="margin-top: 130px;">
+        <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 no-gutters text-center">
+          <h1 class="text-center display-2 mb-0"><kbd>phpnative.</kbd></h1>
+          <hr>
+          <blockquote class="blockquote text-justify mt-3">
+            <p class="mb-0"><span class="font-weight-bold">PHP native</span> merupakan pemrograman web perpaduan bahasa pemrograman yang didasari dengan bahasa pemrograman PHP yang mana bisa disisipi oleh text Javascript, css, bootstrap dan lain-lain. Native sendiri artinya asli, yakni pemrograman php yang murni disusun dan di coding/dibangun oleh para programmer sendiri tanpa ada istilah tambahan buat settingan/ konfigurasi lainnya. Manfaat dari PHP Native sederhana kalau kita sudah menguasai maka akan lebih mudah menggunakan PHP Framework.</p>
+          </blockquote>
+        </div>
       </div>
-    </div>
+    </center>
 
     <footer>
       created by <a href="https://github.com/acakdadu/phpnative" target="_blank" class="text-decoration-none"><span class="mf font-weight-bold">acakdadu</span></a>
     </footer>
+    <?php
+    }
+    ?>
 
 
     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Bootstrap JS -->
-    <script src="<?= BASE_URL.'libraries/jquery-3/jquery-3.4.1.slim.min.js'; ?>"></script>
+    <!-- jQuery first, Bootstrap then DataTables JS -->
+    <script src="<?= BASE_URL.'libraries/jquery-3/jquery-3.3.1.min.js'; ?>"></script>
     <script src="<?= BASE_URL.'libraries/bootstrap-4/js/bootstrap.min.js'; ?>"></script>
+    <script src="<?= BASE_URL.'libraries/dataTables/dataTables.min.js'; ?>"></script>
     <script>
     $(document).ready(function() {
-        console.log( "ready!" );
+
+        // Navbar
+        $('body').on('click', '.nav-link', function(e) {
+          e.preventDefault();
+          $('#content').html('Memuat ...');
+
+          $('.nav-link').removeClass('active');
+          $(this).addClass('active');
+          var page = $(this).attr('page');
+
+          $.get("crud/" + page + ".php", function(html_string){
+            $('#content').html(html_string);
+          },'html'); 
+        });
+
+
     });
     </script>
   </body>

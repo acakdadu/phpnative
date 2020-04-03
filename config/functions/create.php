@@ -41,17 +41,18 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && count($_POST) > 0){
     }
 
     // Prepare an insert statement
-    $sql = "INSERT INTO persons (first_name, last_name, email, active) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO persons (first_name, last_name, email, updated_at, created_at, active) VALUES (?, ?, ?, ?, ?, ?)";
      
     if($stmt = mysqli_prepare($link, $sql)){
         // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "sssi", $param_first_name, $param_last_name, $param_email, $param_active);
+        $dateNow = date('Y-m-d H:i:s');
+        mysqli_stmt_bind_param($stmt, "sssssi", $param_first_name, $param_last_name, $param_email, $dateNow, $dateNow, $param_active);
         
         // Set parameters
         $param_first_name = trim($_REQUEST['first_name']);
         $param_last_name  = trim($_REQUEST['last_name']);
         $param_email      = trim($_REQUEST['email']);
-        $param_active     = 1; // Default
+        $param_active     = (trim($_REQUEST['active']) == 'true') ? '1' : '0';
         
         // Attempt to execute the prepared statement
         if(mysqli_stmt_execute($stmt)){
@@ -71,6 +72,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST" && count($_POST) > 0){
     mysqli_close($link);
 
 } else {
+
     header("Location: ".BASE_URL, true, 400); // Bad Request
     exit;
+    
 }
