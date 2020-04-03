@@ -2,7 +2,7 @@
 -- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
+-- Host: XAMPP/localhost
 -- Generation Time: Apr 03, 2020 at 05:25 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.28
@@ -111,6 +111,7 @@ ALTER TABLE `persons`
 --
 ALTER TABLE `users`
   MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
