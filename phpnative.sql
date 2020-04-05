@@ -2,8 +2,8 @@
 -- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: XAMPP/localhost
--- Generation Time: Apr 03, 2020 at 05:25 PM
+-- Host: localhost
+-- Generation Time: Apr 06, 2020 at 10:12 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.28
 
@@ -53,6 +53,8 @@ CREATE TABLE `persons` (
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `created_at` datetime NOT NULL,
   `active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

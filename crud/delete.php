@@ -8,14 +8,13 @@
 	$sql = "SELECT * FROM persons";
 	if($result = mysqli_query($link, $sql)){
 	    if(mysqli_num_rows($result) > 0){
-	    		$data = [];
 	        while($row = mysqli_fetch_assoc($result)){
 	            $data[] = $row;
 	        }
 	        // Free result set
 	        mysqli_free_result($result);
-	    } else{
-	    	$data[] = null;
+	    } else {
+          $data = NULL;
 	    }
 	} else{
 	    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
@@ -23,15 +22,17 @@
 	 
 	// Close connection
 	mysqli_close($link);
-	$data = $data[array_rand($data)];
 
-	// Message for empty data
-	if(count($data) == 0){
+  if ($data != NULL) {
+	 
+    $data = $data[array_rand($data)];
+
+  } else {
 ?>
 
-<div class="alert alert-warning fs-5" role="alert">
-  <b>Warning: </b> Belum ada data untuk saat ini, silahkan masukan pada menu create.
-</div>
+      <div class="alert alert-info fs-5" role="alert">
+        <b>Warning: </b> Belum ada data untuk saat ini, silahkan masukan pada menu create.
+      </div>
 
 <?php  
 	}
@@ -45,7 +46,7 @@
 <form>
   <div class="form-group">
     <label for="readID">ID</label>
-    <input type="text" name="id" class="form-control disabled" id="readID" aria-describedby="idHelp" value="<?= $data['id']; ?>" readonly>
+    <input type="text" name="id" class="form-control" id="readID" aria-describedby="idHelp" value="<?= $data['id']; ?>" readonly>
     <small id="idHelp" class="form-text text-muted">Random data persons, only for update.</small>
   </div>
   <div class="form-row">
@@ -68,27 +69,34 @@
     <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
   </div>
 	<div class="custom-control custom-switch mb-3">
-	  <input type="checkbox" class="custom-control-input disabled" id="checkActive" <?php if($data['active']){ echo 'checked'; } ?> disabled="disabled">
+	  <input type="checkbox" class="custom-control-input" id="checkActive" <?= ($data['active']) ? 'checked' : ''; ?> disabled="disabled">
 	  <label class="custom-control-label" for="checkActive">Active</label>
 	</div>
 
-  <button type="button" class="btn btn-block btn-danger" id="delete">Delete</button>
+  <button type="button" class="btn btn-block btn-danger <?= ($data === NULL) ? 'disabled" disabled' : '" id="delete"'; ?>>Delete</button>
 </form>
 
 
 <script>
   $('#delete').click(function(){
 
-  	confirm('Are you sure you want to delete this data?');
-  	
-    // // AJAX Method
-    // $.post("config/functions/delete.php", {
-    //   id: $('#readID').val(),
-    // }, function(data, status){
-    //   if (data == 'Records were deleted successfully.'){
-    //   	// Redirect
-    //   }
-    // });
+  	var ask = confirm('Are you sure you want to delete this data?');
+
+    if (ask) {
+      // AJAX Method
+      $.post("config/functions/delete.php", {
+        id: $('#readID').val(),
+      }, function(data, status){
+        if (data == 'Records were deleted successfully'){
+          $('.nav-link[page="delete"]').removeClass('active');
+          $('.nav-link[page="read"]').addClass('active');
+          $.get("crud/read.php", function(html_string){
+            $('#content').html(html_string);
+          },'html'); 
+        }
+      });
+    }
+    
 
   });
 </script>

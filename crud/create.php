@@ -36,21 +36,55 @@
 
 
 <script>
+
+  // Validation
   $('#create').click(function(){
-    // AJAX Method
-    $.post("config/functions/create.php", {
-      first_name: $('#inputFirstName').val(),
-      last_name: $('#inputLastName').val(),
-      email: $('#inputEmail').val(),
-      active: $('#checkActive').is(':checked')
-    }, function(data, status){
-      if (data == 'Records inserted successfully.'){
-        $('.alert-success').fadeIn();
-        $('.form-control').val('');
-      } else {
-        $('.alert-error-data').text(data);
-        $('.alert-error').fadeIn();
-      }
-    });
+
+    var isValid = true;
+    // dataForm
+    var first_name = $('#inputFirstName').val();
+    var last_name  = $('#inputLastName').val();
+    var email      = $('#inputEmail').val();
+    var active     = $('#checkActive').is(':checked');
+
+    // Email validation
+    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+    if (first_name == '') {
+      $('#inputFirstName').addClass('is-invalid'); isValid = false;
+    }
+    if (last_name == '') {
+      $('#inputLastName').addClass('is-invalid'); isValid = false;
+    }
+    if (email == '' || regex.test(email) !== true) {
+      $('#inputEmail').addClass('is-invalid'); isValid = false;
+    }
+
+    if (isValid) {
+
+      // AJAX Method
+      $.post("config/functions/create.php", {
+        first_name: first_name,
+        last_name: last_name,
+        email: email,
+        active: active
+      }, function(data, status){
+        if (data == 'Records inserted successfully.'){
+          $('.alert-success').fadeIn().delay(2500).fadeOut();
+          $('.form-control').val('');
+        } else {
+          $('.alert-error-data').text(data);
+          $('.alert-error').fadeIn();
+        }
+      });
+
+    }
+
   });
+
+  // Clear warning
+  $('.form-control').click(function(){
+    $(this).removeClass('is-invalid');
+  })
+
 </script>

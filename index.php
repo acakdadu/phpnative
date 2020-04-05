@@ -44,8 +44,12 @@
         <a href="<?= BASE_URL.'config/functions/signout.php'; ?>" class="btn btn-sm btn-danger">Sign Out</a>
       </center>
 
-      <div class="row no-gutters" style="margin-top: 130px;">
-        <div class="col-sm-8 offset-sm-2 col-lg-6 offset-lg-3 no-gutters">
+      <div class="row no-gutters" style="margin-top: 90px;">
+        <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3 no-gutters">
+          <center>
+            <h3 class="text-center display-2"><kbd>dashboard</kbd></h3>
+            <a href="" class="btn btn-sm btn-light mb-4" id="userGuideFile">Download User Guide</a>
+          </center>
           <ul class="nav nav-tabs mb-3">
             <li class="nav-item">
               <a class="nav-link" href="" page="create">Create</a>
@@ -60,7 +64,7 @@
               <a class="nav-link" href="" page="delete">Delete</a>
             </li>
           </ul>
-          <div id="content">
+          <div id="content" class="ml-3 mr-3">
             <h1 class="text-center display-3 mb-4 mt-5">Hello, I am CRUD</h1>
             <blockquote class="blockquote text-justify mt-3">
               <p class="mb-0">Anda bisa mempelajari crud pada menu diatas semua fungsi bisa digunaan, jika sudah selesai sebaiknya hapus folder <code>crud</code>. Seluruh halaman crud ada pada folder tersebut, jika memiliki kendala baca selengkapnya di dokumentasi <a href="#">disini</a></p>
@@ -116,7 +120,11 @@
           },'html'); 
         });
 
-
+        // Download user guide for offline
+        $('#userGuideFile').click(function(e){
+          alert('Coming soon!');
+        });
+        
     });
     </script>
   </body>
