@@ -48,7 +48,7 @@
         <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3 no-gutters">
           <center>
             <h3 class="text-center display-2"><kbd>dashboard</kbd></h3>
-            <a href="" class="btn btn-sm btn-light mb-4" id="userGuideFile">Download User Guide</a>
+            <a href="<?= BASE_URL.'assets/files/phpnative_userguide.pdf'; ?>" class="btn btn-sm btn-light mb-4" id="userGuideFile" download>Download User Guide</a>
           </center>
           <ul class="nav nav-tabs mb-3">
             <li class="nav-item">
@@ -122,7 +122,7 @@
 
         // Download user guide for offline
         $('#userGuideFile').click(function(e){
-          alert('Coming soon!');
+          // alert('Coming soon!');
         });
         
     });
