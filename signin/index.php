@@ -100,7 +100,7 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Bootstrap JS -->
-    <script src="<?= BASE_URL.'libraries/jquery-3/jquery-3.4.1.slim.min.js'; ?>"></script>
+    <script src="<?= BASE_URL.'libraries/jquery-3/jquery-3.3.1.min.js'; ?>"></script>
     <script src="<?= BASE_URL.'libraries/bootstrap-4/js/bootstrap.min.js'; ?>"></script>
     <script>
     $(document).ready(function() {
